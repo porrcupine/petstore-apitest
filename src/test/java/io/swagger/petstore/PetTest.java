@@ -11,7 +11,8 @@ import org.junit.Test;
  */
 public class PetTest {
     String idTestValue = RandomStringUtils.randomNumeric(5);
-    String testPetsName = "Pett";
+    String testPetsName = "Pettt";
+    //change from hmb
 
     @Test
     public void petApiTest() {
