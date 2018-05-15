@@ -4,7 +4,8 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
+
 
 /**
  * Created by SK on 2018-05-13
@@ -29,8 +30,8 @@ public class PetTest {
                         " \"status\": \"pending\"\n" +
                         "}")
                 .when().post()
-                .then()
-                .body("id", Matchers.equalTo(Integer.parseInt(idTestValue)));
-                //.then().extract().response().prettyPrint();
+               // .then()
+                //.body("id", Matchers.equalTo(Integer.parseInt(idTestValue)));
+                .then().extract().response().prettyPrint();
     }
 }
