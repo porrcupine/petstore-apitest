@@ -4,6 +4,7 @@ import controllers.PetController;
 import models.PetModel;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -15,7 +16,7 @@ public class PetObjectTest {
         int idTestPetValue = RandomUtils.nextInt(0, 900);
         String nameTestPetValue = RandomStringUtils.randomAlphabetic(5);
         PetModel testPetModel = new PetModel(idTestPetValue, nameTestPetValue, "AVAILABLE", null, null, null);
-        PetModel pet = new PetController(testPetModel).addNewPet();
-        System.out.println(pet);
+        PetModel petResponse = new PetController(testPetModel).addNewPet();
+        Assert.assertTrue(petResponse != null,"Test failed");
     }
 }

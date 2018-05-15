@@ -7,6 +7,7 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 import models.PetModel;
 import org.hamcrest.Matchers;
 
@@ -17,6 +18,7 @@ import static io.restassured.RestAssured.given;
  */
 public class PetController {
     private RequestSpecification requestSpecification;
+    private ResponseSpecification responseSpecification;
     private PetModel pet;
     private final String HEADER_NAME = "api_key";
     private final String HEADER_VALUE = "2233322";
@@ -31,16 +33,17 @@ public class PetController {
                 .setBasePath(BASE_PATH)
                 .setContentType(ContentType.JSON)
                 .log(LogDetail.ALL).build();
-        RestAssured.responseSpecification = new ResponseSpecBuilder()
+        responseSpecification = new ResponseSpecBuilder()
                 .expectContentType(ContentType.JSON)
                 .expectResponseTime(Matchers.lessThan(15000L))
+                //.expectStatusCode(400)
                 .build();
         RestAssured.defaultParser = Parser.JSON;
         this.pet = pet;
     }
 
     public PetModel addNewPet() {
-        return given()
+        return given(requestSpecification)
                 .body(pet)
                 .when()
                 .post()
