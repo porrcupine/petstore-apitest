@@ -1,4 +1,4 @@
-package controllers;
+package controllers.pet;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -8,7 +8,7 @@ import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import models.PetModel;
+import models.pet.PetModel;
 import org.hamcrest.Matchers;
 
 import static io.restassured.RestAssured.given;
@@ -49,4 +49,12 @@ public class PetController {
                 .post()
                 .as(PetModel.class);
     }
+
+    public PetModel updatePet() {
+        return given(requestSpecification)
+                .body(pet)
+                .when()
+                .put().as(PetModel.class);
+    }
+
 }
